@@ -88,6 +88,8 @@ const data = [
   }
 ];
 
+
+
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
   <div class="article">
@@ -99,7 +101,7 @@ const data = [
     <span class='expandButton'></span>
   </div>
 
-  Hint: You will need to use createElement more than once here!
+  Hint: You will need to use createElement more than once here! 
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
@@ -112,3 +114,55 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articles = document.querySelector('.articles');
+
+data.map(article => {
+  articles.appendChild(createComponent(article.title, article.date, article.firstParagraph, article.secondParagraph, article.thirdParagraph))
+});
+
+function createComponent (title, date, firstParagraph, secondParagraph, thirdParagraph) {
+
+  const article = document.createElement('div');
+  // no structure because it is the container
+  article.classList.add('article');
+  // no text because it is the container
+
+  const articleTitle = document.createElement('h2');
+  article.appendChild(articleTitle);
+  articleTitle.classList.add('h2');
+  articleTitle.textContent = title;
+
+  const articleDate = document.createElement('p');
+  article.appendChild(articleDate);
+  articleDate.classList.add('date');
+  articleDate.textContent = date;
+
+  const articleParaOne = document.createElement('p');
+  article.appendChild(articleParaOne);
+  // no style
+  articleParaOne.textContent = firstParagraph;
+
+  const articleParaTwo = document.createElement('p');
+  article.appendChild(articleParaTwo)
+  // no style
+  articleParaTwo.textContent = secondParagraph;
+
+  const articleParaThree = document.createElement('p');
+  article.appendChild(articleParaThree);
+  //no style
+  articleParaThree.textContent = thirdParagraph;
+
+  const expandButton = document.createElement('span');
+  article.appendChild(expandButton);
+  expandButton.classList.add('expandButton');
+  expandButton.textContent = 'Show more';
+
+  expandButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  })
+  return article;
+
+
+}
+
